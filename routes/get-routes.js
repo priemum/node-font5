@@ -72,6 +72,7 @@ router.get('/req/:uid/:msgid', async (req, res)=> {
     try {
         await bot.telegram.copyMessage(userId, -1001239425048, msgid)
         let user = await ds_users.findOneAndUpdate({userId}, {$inc: {downloaded: 1}}, {new: true})
+        console.log(user.fname + " - Got episode by req")
         res.render('5-epsent/sent', {user})
     } catch (err) {
         console.log(err)
