@@ -156,6 +156,30 @@
         font-size: 20px;
     }
 
+    #toAds {
+        height: 50px;
+    }
+
+    .ads {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        border-radius: 2px;
+        border: 1px lightgray solid;
+        margin: 12px auto;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        height: fit-content;
+    }
+
+    @media (max-width: 420px) {
+        .ads .res_ads {
+            width: 300px !important;
+        }
+    }
+
     @media (max-width: 800px) {
         main {
             flex-direction: column;

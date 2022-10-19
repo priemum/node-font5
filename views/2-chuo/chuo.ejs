@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
         content="<%= chuo.name %> | Programmes & Courses, Admission requirements, University capacity & Cutting points">
+    <!-- adsense autoads -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5207543454842727"
+        crossorigin="anonymous"></script>
     <title>
         <%= chuo.name %> Admission Requirements, Capacity, Cutting Points and Programmes/Courses Duration (Years)
     </title>
@@ -26,9 +29,11 @@
     <%- include('../0-global/header.ejs'); %>
         <main>
             <section class="left">
+                <%- include('../0-global/ads/320-ad.ejs'); %>
                 <div class="subiri-cont">
                     <%- include('./partials/telegram/subiri.ejs'); %>
                 </div>
+                <%- include('../0-global/ads/320-ad.ejs'); %>
                 <h1 class="h2" style="font-size: 16px;">
                     <%= chuo.name %> Programmes and Courses | Admission Requirements and Cutting points.
                 </h1>
@@ -92,6 +97,7 @@
                         <% }) %>
                 </div>
                 <div id="toAds"></div>
+                <%- include('../0-global/ads/native-ad.ejs'); %>
                 <div class="ds-tg-points">
 
                 </div>
@@ -99,7 +105,7 @@
 
                 </div>
                 <div class="ds-tg-file">
-                    <%- include('./partials/telegram/ds-file.ejs'); %> 
+                    <%- include('./partials/telegram/ds-file.ejs'); %>
                 </div>
                 <div class="oh-tg-file">
                     <%- include('./partials/telegram/oh-file.ejs'); %>
