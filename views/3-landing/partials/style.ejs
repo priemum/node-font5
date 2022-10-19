@@ -1,0 +1,75 @@
+<style>
+    .land {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin: auto;
+        position: absolute;
+        right: 0; left: 0; bottom: 0; top: 0;
+    }
+
+    .land .tick i {
+        color: green;
+        font-size: 64px;
+        display: flex;
+    }
+
+    .land .butt {
+        margin-top: 12px;
+        text-align: center;
+    }
+
+    .land .butt button {
+        background-color: brown;
+        color: white;
+        padding: 12px;
+        font-weight: bold;
+        font-size: 14px;
+        border: none;
+        border-radius: 4px;
+        display: block;
+        margin: 12px auto;
+        cursor: pointer;
+    }
+
+    .land .butt button:active,
+    .land .butt button:hover {
+        background-color: black;
+    }
+
+    .land .butt i {
+        color: green;
+    }
+
+    .land .butt button i {
+        color: inherit;
+    }
+
+
+
+    .spinner-4 {
+        width: 50px;
+        margin: auto;
+        top: 0; right: 0; bottom: 0; left: 0;
+        position: absolute;
+        --b: 8px;
+        /* the border thickness */
+        aspect-ratio: 1;
+        border-radius: 50%;
+        padding: 1px;
+        background: conic-gradient(#0000 10%, #f03355) content-box;
+        -webkit-mask:
+            repeating-conic-gradient(#0000 0deg, #000 1deg 20deg, #0000 21deg 36deg),
+            radial-gradient(farthest-side, #0000 calc(100% - var(--b) - 1px), #000 calc(100% - var(--b)));
+        -webkit-mask-composite: destination-in;
+        mask-composite: intersect;
+        animation: s4 1s infinite steps(10);
+    }
+
+    @keyframes s4 {
+        to {
+            transform: rotate(1turn)
+        }
+    }
+</style>

@@ -1,0 +1,72 @@
+<style>
+    .land {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin: auto;
+        position: absolute;
+        right: 0; left: 0; bottom: 0; top: 0;
+    }
+
+    .land .tick i {
+        color: #ffd700;
+        font-size: 100px;
+        display: flex;
+        margin-bottom: 12px;
+    }
+
+    .land .check {
+        display: block;
+        margin-top: 2px;
+        font-size: 12px;
+        font-style: italic;
+    }
+
+    .land .user {
+        background-color: #ffd700;
+        text-align: left;
+        padding: 16px;
+        border-radius: 6px;
+    }
+
+    .land .user h5 {
+        padding: 12px;
+        margin: 2px auto;
+    }
+
+    .land #return {
+        cursor: pointer;
+        text-decoration: underline;
+        color: black;
+        display: block;
+        margin-top: 12px;
+    }
+
+
+
+    .spinner-4 {
+        width: 50px;
+        margin: auto;
+        top: 0; right: 0; bottom: 0; left: 0;
+        position: absolute;
+        --b: 8px;
+        /* the border thickness */
+        aspect-ratio: 1;
+        border-radius: 50%;
+        padding: 1px;
+        background: conic-gradient(#0000 10%, #f03355) content-box;
+        -webkit-mask:
+            repeating-conic-gradient(#0000 0deg, #000 1deg 20deg, #0000 21deg 36deg),
+            radial-gradient(farthest-side, #0000 calc(100% - var(--b) - 1px), #000 calc(100% - var(--b)));
+        -webkit-mask-composite: destination-in;
+        mask-composite: intersect;
+        animation: s4 1s infinite steps(10);
+    }
+
+    @keyframes s4 {
+        to {
+            transform: rotate(1turn)
+        }
+    }
+</style>

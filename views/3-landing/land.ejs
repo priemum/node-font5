@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta name="robots" content="noindex,nofollow">
+    <title>Quality check</title>
+    <%- include('./partials/style.ejs'); %>
+</head>
+<body>
+    <div class="land">
+        <div class="tick">
+            <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <div class="butt">
+            <div id="oh">
+                <i class="fa-solid fa-circle-check"></i>
+                OH! MY CHANNEL USER - <b>"ALLOWED"</b> 
+            </div>
+            <div id="ds">
+                <i class="fa-solid fa-circle-check"></i>
+                DRAMA STORE USER - <b>"ALLOWED"</b>
+            </div>
+            <button id="btn">
+                CONTINUE TO THE SITE
+                <i class="fa-solid fa-up-right-from-square"></i>
+            </button>
+        </div>
+    </div>
+    <div id="spin" class="spinner-4"></div>
+
+    <%- include('./partials/script.ejs'); %> 
+</body>
+</html>

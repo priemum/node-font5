@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta name="robots" content="noindex,nofollow">
+    <title>✅ File Sent Successfully</title>
+    <%- include('./partials/style.ejs'); %>
+</head>
+<body>
+    <div class="land">
+        <div class="tick">
+            <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <div class="butt">
+            <div class="user">
+                <div id="ds" style="font-weight: bolder; margin-bottom: 8px;">
+                    <i class="fa-solid fa-circle-check" style="color: green;"></i>
+                    Episode Sent Successfully,
+                    <span class="check">(check your Telegram inbox)</span>
+                </div>
+                <h5>
+                    <i class="fa-solid fa-user"></i>
+                    <span><b>TO: </b><%= user.fname.substring(0,22) %></span>
+                </h5>
+                <h5>
+                    <i class="fa-solid fa-id-card"></i>
+                    <span><b>TG ID: </b><%= user.userId %> </span>
+                </h5>
+                <h5>
+                    <i class="fa-solid fa-download"></i>
+                    <span><b>Your Downloads: </b><%= user.downloaded %> episodes.</span>
+                </h5>
+            </div>
+            <b id="return">Click Here to Return to Telegram...</b>
+        </div>
+    </div>
+    <div id="spin" class="spinner-4"></div>
+
+    <script>
+        setTimeout(()=> {
+            document.getElementById('spin').style.display = 'none'
+            document.querySelector('.land').style.display = 'flex'
+        }, 3000)
+
+        document.getElementById('return').addEventListener('click', ()=> {
+            window.open(`tg://resolve?domain=dramastorebot`, '_self')
+        })
+    </script>
+</body>
+</html>
