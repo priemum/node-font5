@@ -39,8 +39,8 @@
                 document.getElementById('maelz').style.display = 'none'
                 document.getElementById('episode').innerHTML = 'FULL EPISODE WITH ENG SUB <br><br> 👇👇'
                 realBtn.innerText = 'REQUEST EPISODE'
-                realBtn.setAttribute('onclick', `window.open("/req/${uid}/${msgid}")`)
-                
+                realBtn.setAttribute('onclick', `window.open("/req/${uid}/${msgid}", "_self")`)
+
             } else {
                 realBtn.setAttribute('onclick', `openTgDS('${msgid}', '${epno}', '${size}')`)
                 dsWeb.setAttribute('href', `https://t.me/dramastorebot?start=fromWeb${msgid}`)
