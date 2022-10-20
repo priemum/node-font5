@@ -42,6 +42,7 @@
             if (size.includes('NAN')) {
                 let uid = hash.split('&epno=')[1] // replace with userid
                 dsWeb.setAttribute('href', `/req/${uid}/${msgid}`)
+                dsWeb.removeAttribute('target')
                 document.getElementById('maelz').style.display = 'none'
                 document.getElementById('episode').innerHTML = 'FULL EPISODE WITH ENG SUB <br><br> 👇👇'
                 document.getElementById('ds_par').style.display = 'none'
