@@ -1,5 +1,10 @@
 <div class="subiri" id="subiri">
-    <div class="subiri-top"></div>
+    <div class="top-cont">
+     <span class="subiri-top"></span>
+    <span id="scount">05</span>   
+    </div>
+    
+    
     <div class="subiri-body" id="subiri-body">
 
         <div class="text-center spinner-4">
@@ -18,15 +23,23 @@
     function subiriFn() {
         let hash = window.location.hash
         let scroll_btn = document.getElementById('btn-get-file')
+        let stitle = document.querySelector('.subiri-top')
+        let scount = document.getElementById('scount')
         if (hash.includes('#getting') || hash.includes('#adding')) {
             let count = 5;
+            if(hash.includes('#getting-episode')) {
+                stitle.innerText = 'Fetching Episode Info... '
+            } else if(hash.includes('#getting-full')) {
+                stitle.innerText = 'Fetching Video Info... '
+            }
 
             let interval = setInterval(() => {
                 count--
-                document.querySelector('.subiri-top').innerText = 'Fetching Video Info... ' + count
+                scount.innerText = `0${count}`
 
                 if (count == 0) {
                     clearInterval(interval)
+                    scount.style.display = 'none'
                     the_scroll_btn.style.display = 'block'
                     document.querySelector('.subiri-top').innerHTML = '<i style="color: green;" class="fa-solid fa-circle-check"></i> Data Fetched Successfully'
                     document.querySelector('.spinner-4').style.display = 'none'

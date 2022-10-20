@@ -29,10 +29,10 @@
     <%- include('../0-global/header.ejs'); %>
         <main>
             <section class="left">
+                <%- include('../0-global/ads/320-ad.ejs'); %>
                 <div class="subiri-cont">
                     <%- include('./partials/telegram/subiri.ejs'); %>
                 </div>
-                <%- include('../0-global/ads/320-ad.ejs'); %>
                 <h1 class="h2" style="font-size: 16px;">
                     <%= chuo.name %> Programmes and Courses | Admission Requirements and Cutting points.
                 </h1>
@@ -41,7 +41,7 @@
                     <h1>Table of Contents</h1>
                     <ol>
                         <% chuo.programmes.forEach((el, id)=> { %>
-                            <li><a href="#<%= el.pr_code %> ">
+                            <li><a href="#<%= el.pr_code %>">
                                     <%= el.pr %>
                                 </a></li>
                             <% }) %>
@@ -51,7 +51,7 @@
                 <div class="routes">
                     <% chuo.programmes.forEach((pr, ind)=> { %>
                         <div class="route" itemscope>
-                            <h2 class="title" id="<%= pr.pr_code %> ">
+                            <h2 class="title" id="<%= pr.pr_code %>">
                                 <%= ind + 1 %>.
                                     <%= pr.pr %>
                             </h2>
@@ -108,6 +108,9 @@
                 </div>
                 <div class="oh-tg-file">
                     <%- include('./partials/telegram/oh-file.ejs'); %>
+                </div>
+                <div class="others">
+                    <%- include('./partials/all-uni.ejs'); %> 
                 </div>
             </section>
 

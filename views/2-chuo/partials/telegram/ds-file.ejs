@@ -7,15 +7,21 @@
         <h4 id="episode">EPISODE <span id="ep"></span> <br><br> 👇👇</h4>
     </div>
     <div class="button">
-        <button id="realDSTG"><b>OPEN IN TELEGRAM APP <i
-                    class="fa-solid fa-arrow-up-right-from-square"></i></b></button>
-        <button class="wait" id="waitBDSTG">WAITING - <span id="waitDSTG">00</span> sec</button>
+        <button id="realDSTG">
+            <b>OPEN IN TELEGRAM APP
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </b>
+        </button>
+        
+        <button class="wait" id="waitBDSTG">WAITING - <span id="waitDSTG">
+                00</span> sec
+        </button>
         <p id="maelz" style="font-size: smaller;"><i>⚠ click above to get the file.... In the bot click "START"</i>
         </p>
 
         <div class="dstweb tweb">
-            <a id="dstweb" href="#" target="_blank">OPEN IN TELEGRAM WEB</a>
-            <p style="font-size: smaller;"><i>⚠ click above if the first link don't work</i> </p>
+            <a id="dstweb" href="#" target="_blank" rel="nofollow">OPEN IN TELEGRAM WEB</a>
+            <p id="ds_par" style="font-size: smaller;"><i>⚠ click above if the first link don't work</i> </p>
         </div>
     </div>
 </div>
@@ -35,11 +41,12 @@
 
             if (size.includes('NAN')) {
                 let uid = hash.split('&epno=')[1] // replace with userid
-                dsWebClass.style.display = 'none'
+                dsWeb.setAttribute('href', `/req/${uid}/${msgid}`)
                 document.getElementById('maelz').style.display = 'none'
                 document.getElementById('episode').innerHTML = 'FULL EPISODE WITH ENG SUB <br><br> 👇👇'
-                realBtn.innerText = 'REQUEST EPISODE'
-                realBtn.setAttribute('onclick', `window.open("/req/${uid}/${msgid}", "_self")`)
+                document.getElementById('ds_par').style.display = 'none'
+                dsWeb.innerText = 'REQUEST THE EPISODE'
+                realBtn.style.display = 'none'
 
             } else {
                 realBtn.setAttribute('onclick', `openTgDS('${msgid}', '${epno}', '${size}')`)
@@ -49,7 +56,7 @@
 
             let waitSpan = document.getElementById('waitDSTG')
             let fakeBtn = document.getElementById('waitBDSTG')
-            let count = 10
+            let count = 13
             let interval = setInterval(() => {
                 count--
                 waitSpan.innerText = count
@@ -57,9 +64,9 @@
                 if (count == 0) {
                     clearInterval(interval)
                     fakeBtn.style.display = 'none'
-                    realBtn.style.display = 'block'
+                    document.querySelector('.dstweb').style.display = 'flex'
                     if (!size.includes('NAN')) {
-                        document.querySelector('.dstweb').style.display = 'flex'
+                        realBtn.style.display = 'block'
                     }
                 }
             }, 1200)

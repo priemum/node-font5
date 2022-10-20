@@ -86,7 +86,8 @@ router.get('/:code', async (req, res) => {
 
     try {
         let chuo = await vyuo_deg_db.findOne({ code })
-        res.render('2-chuo/chuo', { chuo })
+        let all = await vyuo_deg_db.find().sort('name').select('name code')
+        res.render('2-chuo/chuo', { chuo, all })
     } catch (err) {
         console.log(err)
         console.log(err.message)
