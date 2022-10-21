@@ -12,7 +12,7 @@
 
     }
 
-    if (hash.includes('#getting-full-show-showid=') || hash.includes('#adding-points-ohmy')) {
+    if (hash.includes('#getting-full-show-') || hash.includes('#adding-points-ohmy')) {
         ds.style.display = 'none'
         let btn = document.getElementById('btn')
         btn.setAttribute('onclick', `window.open('/${uni + hash}', '_self')`)

@@ -5,6 +5,7 @@ const ds_users = require('../model/dramastore-users')
 
 const {Telegraf} = require('telegraf')
 const bot = new Telegraf(process.env.DS_TOKEN)
+const bot_oh = new Telegraf(process.env.OH_TOKEN)
 
 //send success (no content) response to browser
 router.get('/favicon.ico', (req, res) => res.status(204).end());
@@ -74,6 +75,21 @@ router.get('/req/:uid/:msgid', async (req, res)=> {
         let user = await ds_users.findOneAndUpdate({userId}, {$inc: {downloaded: 1}}, {new: true})
         console.log(user.fname + " - Got episode by req")
         res.render('5-epsent/sent', {user})
+    } catch (err) {
+        console.log(err)
+        console.log(err.message)
+        res.send('<h2 style="color: red;">Error:... </h2> ' + err.message)
+    }
+})
+
+router.get('/oh-req/:uid/:mid', async (req, res)=> {
+    let userId = Number(req.params.uid.trim())
+    let msgId = Number(req.params.mid.trim())
+
+    try {
+        await bot_oh.telegram.copyMessage(userId, -1001586042518, msgId)
+        console.log(userId + " - Got episode by req")
+        res.render('6-showsent/sent', {userId})
     } catch (err) {
         console.log(err)
         console.log(err.message)
