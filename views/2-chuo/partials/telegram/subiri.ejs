@@ -1,4 +1,4 @@
-<div class="directs">
+<div class="directs" id="directs">
     <span id="fullv"></span>
     <span class="fingers">
         <i class="fa-regular fa-hand-point-down"></i>
@@ -66,6 +66,7 @@
             }, 1200)
 
             document.getElementById('subiri').style.display = 'flex'
+            document.getElementById('directs').style.display = 'block'
 
             if (hash.includes('#getting-episode')) {
                 scroll_btn.innerText = 'Get the Episode'
