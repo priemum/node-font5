@@ -1,3 +1,11 @@
+<div class="directs">
+    <span id="fullv"></span>
+    <span class="fingers">
+        <i class="fa-regular fa-hand-point-down"></i>
+        <i class="fa-regular fa-hand-point-down"></i>
+    </span>
+</div>
+
 <div class="subiri" id="subiri">
     <div class="top-cont">
         <span class="subiri-top"></span>
@@ -25,12 +33,15 @@
         let scroll_btn = document.getElementById('btn-get-file')
         let stitle = document.querySelector('.subiri-top')
         let scount = document.getElementById('scount')
+        let fullv = document.getElementById('fullv')
         if (hash.includes('#getting') || hash.includes('#adding')) {
-            let count = 5;
+            let count = 7;
             if (hash.includes('#getting-episode')) {
                 stitle.innerText = 'Fetching Episode Info... '
+                fullv.innerHTML = '<i class="fa-solid fa-video"></i> Drama Episode'
             } else if (hash.includes('#getting-full')) {
                 stitle.innerText = 'Fetching Video Info... '
+                fullv.innerHTML = '<i class="fa-solid fa-video"></i> Full Video'
             }
 
             let interval = setInterval(() => {
