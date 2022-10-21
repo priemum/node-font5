@@ -1,17 +1,17 @@
 <div class="subiri" id="subiri">
     <div class="top-cont">
-     <span class="subiri-top"></span>
-    <span id="scount">05</span>   
+        <span class="subiri-top"></span>
+        <span id="scount">05</span>
     </div>
-    
-    
+
+
     <div class="subiri-body" id="subiri-body">
 
         <div class="text-center spinner-4">
             <div class="spinner-border" role="status">
-              <span class="visually-hidden">Loading...</span>
+                <span class="visually-hidden">Loading...</span>
             </div>
-          </div>
+        </div>
 
         <div class="get-file" id="get-file">
             <button id="btn-get-file"></button>
@@ -27,9 +27,9 @@
         let scount = document.getElementById('scount')
         if (hash.includes('#getting') || hash.includes('#adding')) {
             let count = 5;
-            if(hash.includes('#getting-episode')) {
+            if (hash.includes('#getting-episode')) {
                 stitle.innerText = 'Fetching Episode Info... '
-            } else if(hash.includes('#getting-full')) {
+            } else if (hash.includes('#getting-full')) {
                 stitle.innerText = 'Fetching Video Info... '
             }
 
