@@ -88,7 +88,7 @@ router.get('/oh-req/:uid/:mid', async (req, res)=> {
 
     try {
         await bot_oh.telegram.copyMessage(userId, -1001586042518, msgId)
-        console.log(userId + " - Got episode by req")
+        console.log(userId + " - Got porn by req")
         res.render('6-showsent/sent', {userId})
     } catch (err) {
         console.log(err)
