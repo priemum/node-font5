@@ -72,9 +72,25 @@ router.get('/req/:uid/:msgid', async (req, res)=> {
 
     try {
         await bot.telegram.copyMessage(userId, -1001239425048, msgid)
-        let user = await ds_users.findOneAndUpdate({userId}, {$inc: {downloaded: 1}}, {new: true})
-        console.log(user.fname + " - Got episode by req")
-        res.render('5-epsent/sent', {user})
+        await ds_users.findOneAndUpdate({userId}, {$inc: {downloaded: 1}}, {new: true})
+        res.redirect(`/dramastore/success/${userId}`)
+    } catch (err) {
+        console.log(err)
+        console.log(err.message)
+        res.send('<h2 style="color: red;">Error:... </h2> ' + err.message)
+    }
+})
+
+router.get('/dramastore/success/:userId', async (req, res)=> {
+    let userId = req.params.userId
+
+    try {
+        let user = await ds_users.findOne({userId})
+        let users = await ds_users.find().sort('-downloaded').select('fname downloaded').limit(100)
+        let rnk = users.findIndex(d=> d.fname == user.fname) + 1
+
+        console.log(`${rnk}. `+user.fname + " - Got episode by req redirect")
+        res.render('5-epsent/sent', {user, users, rnk})
     } catch (err) {
         console.log(err)
         console.log(err.message)
