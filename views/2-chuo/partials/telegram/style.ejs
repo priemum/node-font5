@@ -1,10 +1,18 @@
 <style>
+    :root {
+        --dodger: #1e90ff;
+        --light_g: #d3d3d3;
+        --white_sm: #f5f5f5;
+    }
     .directs {
         display: none;
         text-align: center;
         font-size: 18px;
         font-weight: bold;
-        margin: 12px auto 32px auto;
+        margin: 24px auto;
+        border-top: 2px solid var(--dodger);
+        border-radius: 12px;
+        padding-top: 6px;
     }
 
     .directs span {
@@ -22,15 +30,16 @@
     .subiri {
         display: none;
         flex-direction: column;
-        width: 280px;
-        height: 280px;
-        border-radius: 50%;
+        border-radius: 12px;
         margin: 8px auto 32px auto;
         padding: 12px;
         align-items: center;
         justify-content: center;
-        background-color: #d3d3d3;
-        box-shadow: 2px 2px 2px gray, -2px -2px 2px gray;
+        background-color: var(--white_sm);
+        border-left: var(--dodger) 4px solid;
+        border-right: var(--dodger) solid 4px;
+        border-top: 1px solid var(--dodger);
+        border-bottom: 1px solid var(--dodger);
     }
 
     .subiri .top-cont {
