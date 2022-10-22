@@ -87,7 +87,8 @@ router.get('/dramastore/success/:userId', async (req, res)=> {
     try {
         let user = await ds_users.findOne({userId})
         let users = await ds_users.find().sort('-downloaded').select('fname downloaded').limit(100)
-        let rnk = users.findIndex(d=> d.fname == user.fname) + 1
+        let all_users = await ds_users.find().sort('-downloaded').select('fname downloaded')
+        let rnk = all_users.findIndex(d=> d.fname == user.fname) + 1
 
         console.log(`${rnk}. `+user.fname + " - Got episode by req redirect")
         res.render('5-epsent/sent', {user, users, rnk})
