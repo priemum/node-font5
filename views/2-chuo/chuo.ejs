@@ -36,6 +36,21 @@
                 <h1 class="h2" style="font-size: 16px;">
                     <%= chuo.name %> Programmes and Courses | Admission Requirements and Cutting points.
                 </h1>
+                
+                <div class="about" itemscope itemtype="https://schema.org/CollegeOrUniversity" style="padding: 12px; text-align: justify;">
+                    <p>
+                        <%= chuo.name %> is located in 
+                        <b itemprop="location"><%= chuo.location %></b>
+                        with the registration code of
+                        <b itemprop="leiCode"><%= chuo.code %></b>
+                        and has a
+                        <b itemprop="ownershipFundingInfo"><%= chuo.owner.toLowerCase() %></b>
+                        ownership status.
+                    </p>
+                    <p>
+                        <span itemprop="legalName"><%= chuo.name %> </span> is a Higher Education Institution in Tanzania with institution registration type of <b>"<%= chuo.type %>"</b> approved to admit undergraduate students for various programmes as listed and elaborated below.
+                    </p>
+                </div>
 
                 <div class="table-of-cont">
                     <h1>Table of Contents</h1>
@@ -65,29 +80,31 @@
                                 <li>
                                     <h3>Programme's Admission Requirements: </h3>
                                     <span>
+                                        You can only be admitted in 
+                                        <%= pr.pr %> at <%= chuo.name %>
+                                        with 
                                         <%= pr.add_req %>
-                                    </span>
-                                </li>
-                                <li>
-                                    <h3>Minimum Admission Points = </h3>
-                                    <span class="pts" style="font-weight: bold;">
-                                        <%= pr.min_points %>
                                     </span>
                                 </li>
                                 <li>
                                     <h3>Programme's Admission Capacity: </h3>
                                     <span>
-                                        <%= chuo.name %> can only admitt <b>
+                                        <%= chuo.name %> can only admit <b>
                                                 <%= pr.add_cap %> students
-                                            </b> for this programme / course.
+                                            </b> under <%= pr.pr %> .
+                                    </span>
+                                </li>
+                                <li>
+                                    <h3>Minimum Admission Points: </h3>
+                                    <span class="pts" style="font-weight: bold;">
+                                        <%= pr.min_points %>
                                     </span>
                                 </li>
                                 <li>
                                     <h3>Programme Duration:</h3>
                                     <span>
-                                        <%= pr.pr %> has a duration of <b>
-                                                <%= pr.duration %> years
-                                            </b> in <%= chuo.name %>
+                                        <%= pr.pr %> at <%= chuo.name %> has a duration of 
+                                        <b><%= pr.duration %> years</b>.
                                     </span>
                                 </li>
                             </ul>
