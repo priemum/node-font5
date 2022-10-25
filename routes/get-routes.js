@@ -4,6 +4,7 @@ const mkoa_db = require('../model/vyuo-degree')
 const ds_users = require('../model/dramastore-users')
 
 const {Telegraf} = require('telegraf')
+const { application } = require('express')
 const bot = new Telegraf(process.env.DS_TOKEN)
 const bot_oh = new Telegraf(process.env.OH_TOKEN)
 
@@ -120,11 +121,19 @@ router.get('/:code', async (req, res) => {
     try {
         let chuo = await vyuo_deg_db.findOne({ code })
         let all = await vyuo_deg_db.find().sort('name').select('name code')
-        res.render('2-chuo/chuo', { chuo, all })
+        if(!chuo) {
+            res.redirect(301, '/')
+        } else {
+            res.render('2-chuo/chuo', { chuo, all })
+        }
     } catch (err) {
         console.log(err)
         console.log(err.message)
     }
+})
+
+router.all('*', (req, res)=> {
+    res.redirect(301, '/')
 })
 
 module.exports = router
