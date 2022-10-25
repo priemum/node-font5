@@ -122,7 +122,7 @@ router.get('/:code', async (req, res) => {
         let chuo = await vyuo_deg_db.findOne({ code })
         let all = await vyuo_deg_db.find().sort('name').select('name code')
         if(!chuo) {
-            res.redirect(301, '/')
+            res.sendStatus(404)
         } else {
             res.render('2-chuo/chuo', { chuo, all })
         }
@@ -133,7 +133,7 @@ router.get('/:code', async (req, res) => {
 })
 
 router.all('*', (req, res)=> {
-    res.redirect(301, '/')
+    res.sendStatus(404)
 })
 
 module.exports = router
