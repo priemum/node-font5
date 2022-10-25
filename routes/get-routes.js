@@ -73,8 +73,8 @@ router.get('/req/:uid/:msgid', async (req, res) => {
     let msgid = Number(req.params.msgid.trim())
 
     try {
-        let ds_bin = await bin_ds.findOne({ uid: `${userId}`, mid: `${msgid}`, ch: 'ds' })
-        if (!ds_bin) {
+        let bin = await bin_db.findOne({ uid: `${userId}`, mid: `${msgid}`, ch: 'ds' })
+        if (!bin) {
             await bot.telegram.copyMessage(userId, -1001239425048, msgid)
             let user = await ds_users.findOneAndUpdate({ userId }, { $inc: { downloaded: 1 } }, { new: true })
             await bin_db.create({ uid: `${userId}`, mid: `${msgid}`, ch: 'ds' })
