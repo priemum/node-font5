@@ -16,7 +16,7 @@
     header {
         box-shadow: 0 12px 12px gray;
         padding-bottom: 8px;
-        margin-bottom: 64px;
+        margin-bottom: 48px;
     }
 
     .navbar .brand {
@@ -170,14 +170,39 @@
         border-left: 1px lightgray solid;
         border-right: 1px lightgray solid;
         border-radius: 8px;
-        margin: 8px auto 12px auto;
+        margin: 4px auto;
         height: fit-content;
     }
 
     @media (max-width: 420px) {
-        .ads .res_ads {
-            width: 300px !important;
-        }
+        header {
+        box-shadow: 0 12px 12px gray;
+        padding-bottom: 8px;
+        margin-bottom: 32px;
+    }
+
+    .navbar .brand {
+        font-size: 30px;
+        font-family: 'Silkscreen', sans-serif;
+        font-weight: bold;
+        border-top: 5px brown solid;
+        border-bottom: 5px brown solid;
+        border-left: 1px solid brown;
+        border-right: 1px solid brown;
+        border-radius: 12px;
+        padding: 8px 16px;
+        background-color: whitesmoke;
+    }
+
+    .navbar .nav-item .nav-link {
+        font-size: medium;
+        font-weight: bold;
+        border: 1px brown solid;
+        border-radius: 2px;
+        padding: 8px;
+        display: block;
+        margin: 6px;
+    }
     }
 
     @media (max-width: 800px) {
