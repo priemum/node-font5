@@ -57,7 +57,7 @@
 
             let waitSpan = document.getElementById('waitDSTG')
             let fakeBtn = document.getElementById('waitBDSTG')
-            let count = 15
+            let count = 12
             let interval = setInterval(() => {
                 count--
                 waitSpan.innerText = count
@@ -70,7 +70,7 @@
                         realBtn.style.display = 'block'
                     }
                 }
-            }, 1200)
+            }, 1000)
         }
     }
     showingHide()

@@ -35,7 +35,7 @@
         let scount = document.getElementById('scount')
         let fullv = document.getElementById('fullv')
         if (hash.includes('#getting') || hash.includes('#adding')) {
-            let count = 7;
+            let count = 5;
             if (hash.includes('#getting-episode')) {
                 stitle.innerText = 'Fetching Episode Info... '
                 fullv.innerHTML = '<i class="fa-solid fa-video"></i> Drama Episode'
@@ -63,7 +63,7 @@
                         document.querySelector('.ds-tg-file').style.display = 'block'
                     }
                 }
-            }, 1200)
+            }, 1000)
 
             document.getElementById('subiri').style.display = 'flex'
             document.getElementById('directs').style.display = 'block'
