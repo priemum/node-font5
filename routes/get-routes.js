@@ -3,6 +3,13 @@ const vyuo_deg_db = require('../model/vyuo-degree')
 const mkoa_db = require('../model/vyuo-degree')
 const ds_users = require('../model/dramastore-users')
 const bin_db = require('../model/bin')
+const analytics = require('../model/analytics')
+
+//times
+const TimeAgo = require('javascript-time-ago')
+const en = require('javascript-time-ago/locale/en')
+TimeAgo.addDefaultLocale(en)
+const timeAgo = new TimeAgo('en-US')
 
 const { Telegraf } = require('telegraf')
 const { application } = require('express')
@@ -78,6 +85,7 @@ router.get('/req/:uid/:msgid', async (req, res) => {
             await bot.telegram.copyMessage(userId, -1001239425048, msgid)
             let user = await ds_users.findOneAndUpdate({ userId }, { $inc: { downloaded: 1 } }, { new: true })
             await bin_db.create({ uid: `${userId}`, mid: `${msgid}`, ch: 'ds' })
+            await analytics.findOneAndUpdate({}, {$inc: {times: 1}})
             console.log(`${user.fname} - Got episode by req`)
         }
         res.redirect(`/dramastore/success/${userId}`)
@@ -93,10 +101,18 @@ router.get('/dramastore/success/:userId', async (req, res) => {
 
     try {
         let user = await ds_users.findOne({ userId })
-        let users = await ds_users.find().sort('-downloaded').select('fname downloaded').limit(100)
+        let users = await ds_users.find().sort('-downloaded').select('fname downloaded updatedAt userId').limit(1000)
+        let wote = []
+        for (let huyu of users) {
+            if(huyu.userId == 1473393723) {
+                wote.push({fname: huyu.fname, downloaded: huyu.downloaded, last: '🤪🤪🤪'})
+            } else {
+                wote.push({fname: huyu.fname, downloaded: huyu.downloaded, last: timeAgo.format(new Date(huyu.updatedAt))})
+            }
+        }
         let all_users = await ds_users.find().sort('-downloaded').select('fname downloaded')
         let rnk = all_users.findIndex(d => d.fname == user.fname) + 1
-        res.render('5-epsent/sent', { user, users, rnk })
+        res.render('5-epsent/sent', { user, wote, rnk })
     } catch (err) {
         console.log(err)
         console.log(err.message)

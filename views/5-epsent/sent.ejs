@@ -58,18 +58,19 @@
         <div class="top">
             <table class="table caption-top table-striped">
                 <caption>
-                    <span class="cap">Top 100 dramastore <b>Koreaboo 😍</b></span>
+                    <span class="cap">Top 1,000 dramastore <b>Koreaboo 😍</b></span>
                     <span class="desc">Koreaboo = <i>someone who is obsessed with K-dramas or k-pop.</i></span>
                 </caption>
-                <thead>
+                <thead style="font-size: 14px;">
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">TG 1st name</th>
+                        <th scope="col">1st name</th>
                         <th scope="col">Downloads</th>
+                        <th scope="col">Last down'd</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <% users.forEach((u, i)=> { %>
+                <tbody style="font-size: 12px;">
+                    <% wote.forEach((u, i)=> { %>
                         <tr>
                             <td>
                                 <%= i + 1 %>.
@@ -79,6 +80,9 @@
                             </td>
                             <td>
                                 <%= u.downloaded %>
+                            </td>
+                            <td>
+                                <%= u.last %>
                             </td>
                         </tr>
                         <% }) %>
