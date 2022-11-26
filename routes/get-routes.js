@@ -64,6 +64,10 @@ router.get('/blog', (req, res) => {
     res.redirect(301, '/')
 })
 
+router.get('/withdraw-tax-1xbet-tanzania', (req, res)=> {
+    res.render('7-1xbet/calc')
+})
+
 router.get(['/blog/post.html', '/blog/post'], async (req, res) => {
     let vyuo_count = await vyuo_deg_db.countDocuments()
     let rand = Math.floor(Math.random() * vyuo_count)
