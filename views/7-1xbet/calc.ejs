@@ -63,7 +63,7 @@
                 Unatoa: <b>Tsh. <span id="toa">0</span></b>
             </div>
             <div>
-                Makato (3%): <b>Tsh. <span id="mk">0</span></b>
+                Makato (5%): <b>Tsh. <span id="mk">0</span></b>
             </div>
             <div>
                 Utapokea: <b>Tsh. <span id="hela">0</span></b>
@@ -80,7 +80,7 @@
             let val = document.getElementById('in').value
             toa.innerText = Number(val).toLocaleString('en-us')
 
-            let final = val * 0.97
+            let final = val * 0.95
             mk.innerText = (val - final).toLocaleString('en-us')
             majibu.innerText = final.toLocaleString('en-us')
         })
