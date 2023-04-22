@@ -4,6 +4,7 @@ const mkoa_db = require('../model/vyuo-degree')
 const ds_users = require('../model/dramastore-users')
 const bin_db = require('../model/bin')
 const analytics = require('../model/analytics')
+const graphModel = require('../model/graph-tips')
 
 //times
 const TimeAgo = require('javascript-time-ago')
@@ -146,6 +147,17 @@ router.get('/oh-req/:uid/:mid', async (req, res) => {
 router.get('/ohmy-channel/success/:uid', async (req, res) => {
     let userId = Number(req.params.uid.trim())
     res.render('6-showsent/sent', { userId })
+})
+
+router.get('/mkekawaleo/tanzania', async (req, res)=> {
+    try {
+        let d = new Date().toLocaleDateString('en-GB', {timeZone: 'Africa/Nairobi'})
+        let mk = await graphModel.findOneAndUpdate({siku: d}, {$inc: {loaded: 1}}, {new: true})
+        if(mk) {res.redirect(mk.link)}
+        else{res.redirect('http://mkekawaleo.com')}
+    } catch (err) {
+        console.log(err.message)
+    }
 })
 
 router.get('/:code', async (req, res) => {
