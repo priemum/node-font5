@@ -152,7 +152,7 @@ router.get('/ohmy-channel/success/:uid', async (req, res) => {
 router.get('/mkekawaleo/tanzania', async (req, res)=> {
     try {
         res.redirect('http://mkekawaleo.com/betslip/leo')
-        await graphModel.findOneAndUpdate({siku: '23/04/2023'}, {$inc: {loaded: 1}})
+        await graphModel.findOneAndUpdate({siku: '22/04/2023'}, {$inc: {loaded: 1}})
     } catch (err) {
         console.log(err.message)
     }
