@@ -151,10 +151,8 @@ router.get('/ohmy-channel/success/:uid', async (req, res) => {
 
 router.get('/mkekawaleo/tanzania', async (req, res)=> {
     try {
-        let d = new Date().toLocaleDateString('en-GB', {timeZone: 'Africa/Nairobi'})
-        let mk = await graphModel.findOneAndUpdate({siku: d}, {$inc: {loaded: 1}}, {new: true})
-        if(mk) {res.redirect(mk.link)}
-        else{res.redirect('http://mkekawaleo.com')}
+        res.redirect('http://mkekawaleo.com/betslip/leo')
+        await graphModel.findOneAndUpdate({siku: '23/04/2023'}, {$inc: {loaded: 1}})
     } catch (err) {
         console.log(err.message)
     }
