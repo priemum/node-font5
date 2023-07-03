@@ -17,6 +17,9 @@ const { application } = require('express')
 const bot = new Telegraf(process.env.DS_TOKEN)
 const bot_oh = new Telegraf(process.env.OH_TOKEN)
 
+//others
+const oh_vids = require('../model/ohmy-vids')
+
 //send success (no content) response to browser
 router.get('/favicon.ico', (req, res) => res.status(204).end());
 
@@ -155,6 +158,43 @@ router.get('/mkekawaleo/tanzania', async (req, res)=> {
         await graphModel.findOneAndUpdate({siku: '22/04/2023'}, {$inc: {loaded: 1}})
     } catch (err) {
         console.log(err.message)
+    }
+})
+
+router.get('/ohmy/:chatid/:nano', async (req, res) => {
+    let chatid = req.params.chatid
+    let nano = req.params.nano
+
+    const offers = {
+        adult_games_smrt: `https://redirecting5.eu/p/tveg/GFOt/46RX`,
+        sexEmu: `https://redirecting5.eu/p/tveg/7G3I/m8RG`,
+        adul_dating: `https://leadmy.pl/p/tveg/7mhb/BDLj`
+    }
+
+    try {
+        let ohmyDB = -1001586042518
+        let shemdoe = 741815228
+
+        res.redirect(offers.adul_dating)
+        let vid = await oh_vids.findOne({ nano })
+        setTimeout(() => {
+            bot_oh.telegram.copyMessage(Number(chatid), ohmyDB, vid.msgId, {
+                reply_markup: {
+                    parse_mode: 'HTML',
+                    inline_keyboard: [[
+                        { text: 'Join Here For More...', url: 'https://t.me/+TCbCXgoThW0xOThk' }
+                    ]]
+                }
+            })
+                .then(() => console.log('Video sent by req'))
+                .catch(async (err) => {
+                    await bot.telegram.sendMessage(shemdoe, 'Web Req: ' + err.message)
+                        .catch(e => console.log(e.message))
+                })
+        }, 10000)
+
+    } catch (error) {
+        console.log(`${error.message} on nano: "${nano}" for user "${chatid}"`)
     }
 })
 
