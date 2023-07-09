@@ -200,7 +200,7 @@ const reginaBot = async () => {
         }
     })
 
-    botRegi.command('/mkeka3', async ctx => {
+    botRegi.command('mkeka3', async ctx => {
         try {
             await call_sendMikeka_functions.sendMkeka3(ctx, delay, botRegi, imp)
         } catch (err) {
@@ -211,7 +211,7 @@ const reginaBot = async () => {
 
     })
 
-    botRegi.command('/wakesho', async ctx => {
+    botRegi.command('wakesho', async ctx => {
         try {
             let d = new Date()
             d.setDate(d.getDate() + 1)
@@ -255,7 +255,7 @@ const reginaBot = async () => {
             .catch((err) => console.log(err.message))
     })
 
-    botRegi.command('/sll', async ctx => {
+    botRegi.command('sll', async ctx => {
         await nyumbuModel.updateMany({}, { $set: { refferer: "Regina" } })
         ctx.reply('Updated')
     })
@@ -278,7 +278,7 @@ const reginaBot = async () => {
         }
     })
 
-    botRegi.command('/post_to_channels', async ctx => {
+    botRegi.command('post_to_channels', async ctx => {
         let txt = ctx.message.text
         let ch_link = 'https://t.me/+804l_wD7yYgzM2Q0'
         let pload_link = `https://t.me/regina_tzbot?start=ngono_bongo`
@@ -304,7 +304,7 @@ const reginaBot = async () => {
         }
     })
 
-    botRegi.command('/kujisajili', async ctx => {
+    botRegi.command('kujisajili', async ctx => {
         try {
             await botRegi.telegram.copyMessage(ctx.chat.id, imp.pzone, 7595)
         } catch (err) {
@@ -312,7 +312,7 @@ const reginaBot = async () => {
         }
     })
 
-    botRegi.command('/kudeposit', async ctx => {
+    botRegi.command('kudeposit', async ctx => {
         try {
             await botRegi.telegram.copyMessage(ctx.chat.id, imp.pzone, 7596)
         } catch (err) {
@@ -467,7 +467,7 @@ const reginaBot = async () => {
         }
     })
 
-    botRegi.command('/pending', async ctx => {
+    botRegi.command('pending', async ctx => {
         try {
             let baki = await tempChat.countDocuments()
             await ctx.reply('Tuna requests ' + baki)
