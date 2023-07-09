@@ -50,9 +50,6 @@ app.listen(process.env.PORT || 3000, async () => {
     }
 })
 
-process.once('SIGINT', () => botRegi.stop('SIGINT'))
-process.once('SIGTERM', () => botRegi.stop('SIGTERM'))
-
 process.on('unhandledRejection', async (reason, promise) => {
     await botRegi.telegram.sendMessage(741815228, reason + ' It is an unhandled rejection.')
     console.log(reason)
@@ -61,3 +58,5 @@ process.on('unhandledRejection', async (reason, promise) => {
 process.on('uncaughtException', async (err) => {
     console.log(err)
 })
+
+process.on('warning', e => console.warn(e.stack));
