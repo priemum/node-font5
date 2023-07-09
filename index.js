@@ -35,9 +35,10 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static(__dirname + '/public'))
 app.set('trust proxy', true) //our app is hosted on server using proxy to pass user request
 app.use(limiter)
-app.use(getRouter)
-
+//calling regina
 regina_bot.reginaBot(botRegi)
+//continues with our routes
+app.use(getRouter)
 
 app.listen(process.env.PORT || 3000, async () => {
     try {
