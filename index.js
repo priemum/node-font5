@@ -13,6 +13,8 @@ mongoose.connect(`mongodb://${process.env.USER}:${process.env.PASS}@nodetuts-sha
     console.log(err)
 })
 
+const regina_bot = require('./bot/regibot/bot')
+
 const limiter = elimit({
 	windowMs: 60 * 1000, // 1 minute
 	max: 7, // Limit each IP to 7 requests per `window` (here, per 1 minute)
@@ -30,6 +32,7 @@ app.set('trust proxy', true) //our app is hosted on server using proxy to pass u
 app.use(limiter)
 app.use(getRouter)
 
+regina_bot.reginaBot()
 
 app.listen(process.env.PORT || 3000, ()=> console.log('Running on port 3000'))
 
