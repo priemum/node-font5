@@ -31,7 +31,7 @@ app.use(limiter)
 app.use(getRouter)
 
 
-app.listen(process.env.PORT || 3000, ()=> console.log('Running on port 3000'))
+app.listen(process.env.PORT || 3000, ()=> console.log('Listen to port 3000'))
 
 process.on('unhandledRejection', (reason, promise) => {
     console.log(reason)
