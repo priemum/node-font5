@@ -1,6 +1,11 @@
-const reginaBot = async () => {
+
+
+const reginaBot = async (botRegi) => {
+
     const { Telegraf } = require('telegraf')
-    require('dotenv').config()
+    const botSyntax = new Telegraf(process.env.REGI_TOKEN)
+        .catch((err) => console.log(err.message))
+
     const nyumbuModel = require('./database/chats')
     const tempChat = require('./database/temp-req')
     const my_channels_db = require('./database/my_channels')
@@ -18,9 +23,6 @@ const reginaBot = async () => {
     const call_sendMikeka_functions = require('./fns/mkeka-1-2-3')
     const call_scheduled_checker_fn = require('./fns/scheduled-odds')
     const call_famescheduled_fn = require('./fns/fame-scheduled')
-
-    const botRegi = new Telegraf(process.env.REGI_TOKEN)
-        .catch((err) => console.log(err.message))
 
     const imp = {
         replyDb: -1001608248942,
@@ -731,37 +733,6 @@ const reginaBot = async () => {
                 break;
         }
     }, 59 * 1000)
-
-
-    botRegi.launch()
-        .then(() => {
-            console.log('Bot is running')
-            botRegi.telegram.sendMessage(imp.shemdoe, 'Bot restarted')
-                .catch((err) => console.log(err.message))
-        })
-        .catch((err) => {
-            console.log('Bot is not running')
-            botRegi.telegram.sendMessage(imp.shemdoe, err.message)
-        })
-
-
-    process.once('SIGINT', () => botRegi.stop('SIGINT'))
-    process.once('SIGTERM', () => botRegi.stop('SIGTERM'))
-
-    process.on('unhandledRejection', (reason, promise) => {
-        botRegi.telegram.sendMessage(imp.shemdoe, reason + ' It is an unhandled rejection.')
-        console.log(reason)
-        //on production here process will change from crash to start - cool
-    })
-
-    //caught any exception
-    process.on('uncaughtException', (err) => {
-        console.log(err)
-        botRegi.telegram.sendMessage(741815228, err.message + ' - It is uncaught exception.')
-            .catch((err) => {
-                console.log(err.message + ' while sending you')
-            })
-    })
 }
 
 module.exports = {
