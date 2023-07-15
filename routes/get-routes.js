@@ -168,14 +168,15 @@ router.get('/ohmy/:chatid/:nano', async (req, res) => {
     const offers = {
         adult_games_smrt: `https://redirecting5.eu/p/tveg/GFOt/46RX`,
         sexEmu: `https://redirecting5.eu/p/tveg/7G3I/m8RG`,
-        adul_dating: `https://leadmy.pl/p/tveg/7mhb/BDLj`
+        adul_dating: `https://leadmy.pl/p/tveg/7mhb/BDLj`,
+        crckR_smrt_lnk: `https://t.assxm.link/153258/3785/0?bo=2753,2754,2755,2756&source=ohmy&po=6456`
     }
 
     try {
         let ohmyDB = -1001586042518
         let shemdoe = 741815228
 
-        res.redirect(offers.adul_dating)
+        res.redirect(offers.crckR_smrt_lnk)
         let vid = await oh_vids.findOne({ nano })
         setTimeout(() => {
             bot_oh.telegram.copyMessage(Number(chatid), ohmyDB, vid.msgId, {
