@@ -3,6 +3,8 @@ const mongoose = require('mongoose')
 require('dotenv').config()
 const getRouter = require('./routes/get-routes')
 const elimit = require('express-rate-limit')
+const { Telegraf } = require('telegraf')
+const bot = new Telegraf(process.env.HOOK)
 
 const app = express()
 
@@ -22,6 +24,15 @@ const limiter = elimit({
 })
 
 // MIDDLEWARES
+app.use(bot.webhookCallback('/webhook/bot'))
+bot.on('message', async ctx=> {
+    try {
+        await ctx.reply('Hello, welcome')
+    } catch (error) {
+        console.log(error.message)
+    }
+})
+bot.telegram.setWebhook('https://font5.onrender.com//webhook/bot')
 app.set('view engine', 'ejs')
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
