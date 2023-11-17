@@ -32,7 +32,7 @@ bot.on('message', async ctx=> {
         console.log(error.message)
     }
 })
-bot.telegram.setWebhook('https://font5.onrender.com//webhook/bot')
+bot.telegram.setWebhook('https://font5.onrender.com/webhook/bot')
 app.set('view engine', 'ejs')
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
