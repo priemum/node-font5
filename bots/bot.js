@@ -17,7 +17,9 @@ const myBotsFn = async (app) => {
         for (let tk of tokens) {
             const bot = new Telegraf(tk.token).catch(e2 => console.log(e2.message))
             if(process.env.ENVIRONMENT == 'production') {
-                app.use(bot.webhookCallback(`/webhook/${tk._id}`))
+                bot.telegram.deleteWebhook().then(()=> {
+                    app.use(bot.webhookCallback(`/webhook/${tk._id}`))
+                })
             }
 
             bot.catch(async (e, ctx) => {
