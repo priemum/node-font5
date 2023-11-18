@@ -17,7 +17,7 @@ const myBotsFn = async (app) => {
         for (let tk of tokens) {
             const bot = new Telegraf(tk.token).catch(e2 => console.log(e2.message))
             if(process.env.ENVIRONMENT == 'production') {
-                app.use(bot.webhookCallback('/webhook/bot'))
+                app.use(bot.webhookCallback('/webhook/global'))
             }
 
             bot.catch(async (e, ctx) => {
@@ -35,7 +35,7 @@ const myBotsFn = async (app) => {
                         await usersModel.create({ chatid, first_name, botname, token: tk.token })
                     }
                     let url = `https://playabledownload.com/1584699`
-                    await ctx.reply(`Hello <b>${first_name}!</b>\n\nWelcome to our platform. Unlock the largest library of adult videos and leakage sex tapes as well as our private group for escorts and hookups.\n\nBelow, prove your are not a robot to unlock the group invite link.`, {
+                    await ctx.reply(`Hello <b>${first_name}!</b>\n\nWelcome to our platform. Unlock the largest library of adult videos and leaked sex tapes as well as our private group for escorts and hookups.\n\nBelow, prove your are not a robot to unlock the group invite link.`, {
                         parse_mode: 'HTML',
                         reply_markup: {
                             inline_keyboard: [
@@ -87,10 +87,10 @@ const myBotsFn = async (app) => {
                     console.log(err.message)
                 }
             })
-            
+
 
             if(process.env.ENVIRONMENT == 'production') {
-                bot.telegram.setWebhook('https://font5.onrender.com/webhook/bot').catch(e => console.log(e.message))
+                bot.telegram.setWebhook('https://font5.onrender.com/webhook/global').catch(e => console.log(e.message))
             } else {
                 bot.launch().catch(e=> console.log(e.message))
             }
