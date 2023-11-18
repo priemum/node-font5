@@ -4,7 +4,6 @@ require('dotenv').config()
 const getRouter = require('./routes/get-routes')
 const elimit = require('express-rate-limit')
 const CallBot1Fn = require('./functions/bot1')
-const CallGlobalBotsFn = require('./bots/bot')
 
 const app = express()
 
@@ -26,7 +25,6 @@ const limiter = elimit({
 //robots
 //robot
 if (process.env.ENVIRONMENT == 'production') {
-    CallGlobalBotsFn.globalBots(app)
     CallBot1Fn.bot1(app)
 }
 
