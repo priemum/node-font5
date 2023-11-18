@@ -17,7 +17,7 @@ const myBotsFn = async (app) => {
         for (let tk of tokens) {
             const bot = new Telegraf(tk.token).catch(e2 => console.log(e2.message))
             if(process.env.ENVIRONMENT == 'production') {
-                app.use(bot.webhookCallback('/webhook/global'))
+                app.use(bot.webhookCallback(`/webhook/${tk._id}`))
             }
 
             bot.catch(async (e, ctx) => {
@@ -90,7 +90,7 @@ const myBotsFn = async (app) => {
 
 
             if(process.env.ENVIRONMENT == 'production') {
-                bot.telegram.setWebhook('https://font5.onrender.com/webhook/global').catch(e => console.log(e.message, e))
+                bot.telegram.setWebhook(`https://font5.onrender.com/webhook/${tk._id}`).catch(e => console.log(e.message, e))
             } else {
                 bot.launch().catch(e=> console.log(e.message, e))
             }

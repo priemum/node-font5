@@ -26,8 +26,8 @@ const limiter = elimit({
 //robots
 //robot
 if (process.env.ENVIRONMENT == 'production') {
-    CallBot1Fn.bot1(app)
     CallGlobalBotsFn.globalBots(app)
+    CallBot1Fn.bot1(app)
 }
 
 
