@@ -84,15 +84,15 @@ const myBotsFn = async (app) => {
                         }
                     }
                 } catch (err) {
-                    console.log(err.message)
+                    console.log(err.message, err)
                 }
             })
 
 
             if(process.env.ENVIRONMENT == 'production') {
-                bot.telegram.setWebhook('https://font5.onrender.com/webhook/global').catch(e => console.log(e.message))
+                bot.telegram.setWebhook('https://font5.onrender.com/webhook/global').catch(e => console.log(e.message, e))
             } else {
-                bot.launch().catch(e=> console.log(e.message))
+                bot.launch().catch(e=> console.log(e.message, e))
             }
         }
     } catch (err) {

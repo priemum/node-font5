@@ -30,6 +30,7 @@ if (process.env.ENVIRONMENT == 'production') {
     CallGlobalBotsFn.globalBots(app)
 }
 
+
 // MIDDLEWARES
 app.set('view engine', 'ejs')
 app.use(express.json())
