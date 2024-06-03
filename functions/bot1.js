@@ -4,6 +4,7 @@ const bot1Fn = async (app) => {
     try {
         const bot = new Telegraf(process.env.HOOK)
         if(process.env.ENVIRONMENT == 'production') {
+            bot.telegram.deleteWebhook({ drop_pending_updates: true }).catch(e => console.log(e.message))
             app.use(bot.webhookCallback('/webhook/bot1'))
         }
 
