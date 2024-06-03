@@ -4,7 +4,7 @@ const bot1Fn = async (app) => {
     try {
         const bot = new Telegraf(process.env.HOOK)
         if(process.env.ENVIRONMENT == 'production') {
-            app.use(bot.webhookCallback('/webhook/bot'))
+            app.use(bot.webhookCallback('/webhook/bot1'))
         }
 
         bot.command('mama', async ctx=> {
@@ -25,7 +25,7 @@ const bot1Fn = async (app) => {
 
 
         if(process.env.ENVIRONMENT == 'production') {
-            bot.telegram.setWebhook('https://font5.onrender.com/webhook/bot').catch(e => console.log(e.message))
+            bot.telegram.setWebhook('https://node-font5-production.up.railway.app/webhook/bot1').catch(e => console.log(e.message))
         } else {
             bot.launch().catch(e=> console.log(e.message))
         }
