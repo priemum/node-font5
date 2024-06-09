@@ -13,10 +13,9 @@ const en = require('javascript-time-ago/locale/en')
 TimeAgo.addDefaultLocale(en)
 const timeAgo = new TimeAgo('en-US')
 
-const { Telegraf } = require('telegraf')
-const { application } = require('express')
-const bot = new Telegraf(process.env.DS_TOKEN)
-const bot_oh = new Telegraf(process.env.OH_TOKEN)
+const { Bot } = require('grammy')
+const bot = new Bot(process.env.DS_TOKEN)
+const bot_oh = new Bot(process.env.OH_TOKEN)
 
 //others
 const oh_vids = require('../model/ohmy-vids')
@@ -100,7 +99,7 @@ router.get('/req/:uid/:msgid', async (req, res) => {
     try {
         let bin = await bin_db.findOne({ uid: `${userId}`, mid: `${msgid}`, ch: 'ds' })
         if (!bin) {
-            await bot.telegram.copyMessage(userId, -1001239425048, msgid)
+            await bot.api.copyMessage(userId, -1001239425048, msgid)
             let user = await ds_users.findOneAndUpdate({ userId }, { $inc: { downloaded: 1 } }, { new: true })
             await bin_db.create({ uid: `${userId}`, mid: `${msgid}`, ch: 'ds' })
             await analytics.findOneAndUpdate({}, {$inc: {times: 1}})
@@ -145,7 +144,7 @@ router.get('/oh-req/:uid/:mid', async (req, res) => {
     try {
         let check_bin = await bin_db.findOne({ uid: `${userId}`, mid: `${msgId}`, ch: 'oh' })
         if (!check_bin) {
-            await bot_oh.telegram.copyMessage(userId, -1001586042518, msgId)
+            await bot_oh.api.copyMessage(userId, -1001586042518, msgId)
             await bin_db.create({ uid: `${userId}`, mid: `${msgId}`, ch: 'oh' })
             console.log(userId + " - Got porn by req")
         }
@@ -189,7 +188,7 @@ router.get('/ohmy/:chatid/:nano', async (req, res) => {
         res.redirect(offers.crckR_smrt_lnk)
         let vid = await oh_vids.findOne({ nano })
         setTimeout(() => {
-            bot_oh.telegram.copyMessage(Number(chatid), ohmyDB, vid.msgId, {
+            bot_oh.api.copyMessage(Number(chatid), ohmyDB, vid.msgId, {
                 reply_markup: {
                     parse_mode: 'HTML',
                     inline_keyboard: [[
@@ -199,7 +198,7 @@ router.get('/ohmy/:chatid/:nano', async (req, res) => {
             })
                 .then(() => console.log('Video sent by req'))
                 .catch(async (err) => {
-                    await bot.telegram.sendMessage(shemdoe, 'Web Req: ' + err.message)
+                    await bot.api.sendMessage(shemdoe, 'Web Req: ' + err.message)
                         .catch(e => console.log(e.message))
                 })
         }, 10000)
@@ -224,6 +223,11 @@ router.get('/:code', async (req, res) => {
         console.log(err)
         console.log(err.message)
     }
+})
+
+//this all placed on post requests because it is the last on index.js
+router.all('*', (req, res) => {
+    res.sendStatus(404)
 })
 
 module.exports = router

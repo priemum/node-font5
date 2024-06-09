@@ -3,7 +3,7 @@ const axios = require('axios').default
 
 const bot2Fn = async () => {
     try {
-        const bot = new Telegraf(process.env.HOOK2)
+        const bot = new Telegraf("")
         bot.command('mama', async ctx=> {
             try {
                 await ctx.reply('Mama yako ni selina')
