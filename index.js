@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 require('dotenv').config()
 const getRouter = require('./routes/get-routes')
+const { handlePriceBots } = require('./bots/handleBotFunctions')
 
 const app = express()
 
@@ -20,6 +21,9 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static(__dirname + '/public'))
 app.set('trust proxy', true) //our app is hosted on server using proxy to pass user request
 app.use(getRouter)
+
+//bots
+handlePriceBots()
 
 app.listen(process.env.PORT || 3000, () => console.log('Listen to port 3000'))
 
