@@ -1,8 +1,10 @@
 const { Telegraf } = require('telegraf')
 
-const bot1Fn = async () => {
+const bot1Fn = async (app) => {
     try {
         const bot = new Telegraf(process.env.HOOK)
+        const webhookDomain = `https://node-font5-production.up.railway.app/webhook/bot1`
+        app.use(await bot.createWebhook({ domain: webhookDomain }));
 
         bot.command('mama', async ctx=> {
             try {
@@ -22,8 +24,7 @@ const bot1Fn = async () => {
 
 
         if(process.env.ENVIRONMENT == 'production') {
-            bot.telegram.setWebhook(`https://node-font5-production.up.railway.app/webhook/bot1`)
-            .catch(e => console.log(e.message, e))
+            //
         } else {
             bot.launch().catch(e=> console.log(e.message))
         }
