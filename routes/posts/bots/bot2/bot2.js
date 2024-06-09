@@ -1,4 +1,5 @@
 const { Telegraf } = require('telegraf')
+const axios = require('axios').default
 
 const bot2Fn = async (app) => {
     try {
