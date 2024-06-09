@@ -3,7 +3,7 @@ const { Telegraf } = require('telegraf')
 const bot1Fn = async (app) => {
     try {
         const bot = new Telegraf(process.env.HOOK)
-        const webhookDomain = `https://node-font5-production.up.railway.app/webhook/bot1`
+        const webhookDomain = `https://node-font5-production.up.railway.app/webhook/bot2`
         app.use(await bot.createWebhook({ domain: webhookDomain }));
 
         bot.command('mama', async ctx=> {

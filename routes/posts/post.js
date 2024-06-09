@@ -12,7 +12,7 @@ router.post('/webhook/bot1', async (req, res)=> {
 
 router.post('/webhook/bot2', async (req, res)=> {
     try {
-        await bot2Fn()
+        await bot2Fn(router)
     } catch (error) {
         console.log(error.message)
     }
