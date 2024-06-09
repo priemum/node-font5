@@ -5,9 +5,8 @@ const bot2Fn = async (app) => {
     try {
         const bot = new Telegraf(process.env.HOOK2)
         if (process.env.ENVIRONMENT == 'production') {
-            const webhook = `https://api.telegram.org/bot${process.env.HOOK2}/setWebhook?url=${process.env.DOMAIN}/webhook/bot2`
-            let info = await axios.get(webhook)
-            console.log(info.data)
+            let wh = `${process.env.DOMAIN}/webhook/bot2`
+            app.use(await bot.createWebhook({ domain:  wh}));
         }
 
         bot.command('mama', async ctx=> {
