@@ -29,7 +29,7 @@ const limiter = elimit({
     legacyHeaders: false, // Disable the `X-RateLimit-*` headers
     message: "To many request, please try again after 3 minutes"
 })
-router.use(elimit)
+router.use(limiter)
 
 router.get('/favicon.ico', (req, res) => res.status(204).end());
 
