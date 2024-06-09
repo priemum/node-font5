@@ -28,13 +28,7 @@ const bot1Fn = async (app) => {
 
 
         if (process.env.ENVIRONMENT == 'production') {
-            bot.launch({
-                webhook: {
-                    domain: process.env.DOMAIN,
-                    hookPath: '/webhook/bot1',
-                    port: process.env.PORT
-                }
-            }).catch(e => console.log(e.message))
+            //
         } else {
             bot.launch().catch(e => console.log(e.message))
         }
