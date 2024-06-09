@@ -18,4 +18,9 @@ router.post('/webhook/bot2', async (req, res)=> {
     }
 })
 
+//this all placed on post requests because it is the last on index.js
+router.all('*', (req, res) => {
+    res.sendStatus(404)
+})
+
 module.exports = router

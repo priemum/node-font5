@@ -3,8 +3,6 @@ const mongoose = require('mongoose')
 require('dotenv').config()
 const getRouter = require('./routes/get-routes')
 const postRouter = require('./routes/posts/post')
-const elimit = require('express-rate-limit')
-const CallBot1Fn = require('./functions/bot1')
 
 const app = express()
 
@@ -15,14 +13,6 @@ mongoose.connect(`mongodb://${process.env.USER}:${process.env.PASS}@nodetuts-sha
         console.log(err)
     })
 
-const limiter = elimit({
-    windowMs: 60 * 1000, // 1 minute
-    max: 7, // Limit each IP to 7 requests per `window` (here, per 1 minute)
-    standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-    legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-    message: "To many request, please try again after 3 minutes"
-})
-
 
 // MIDDLEWARES
 app.set('view engine', 'ejs')
@@ -30,7 +20,6 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static(__dirname + '/public'))
 app.set('trust proxy', true) //our app is hosted on server using proxy to pass user request
-app.use(limiter)
 app.use(getRouter)
 app.use(postRouter)
 

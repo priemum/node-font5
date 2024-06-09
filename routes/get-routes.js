@@ -1,4 +1,5 @@
 const router = require('express').Router()
+const elimit = require('express-rate-limit')
 const vyuo_deg_db = require('../model/vyuo-degree')
 const mkoa_db = require('../model/vyuo-degree')
 const ds_users = require('../model/dramastore-users')
@@ -21,6 +22,15 @@ const bot_oh = new Telegraf(process.env.OH_TOKEN)
 const oh_vids = require('../model/ohmy-vids')
 
 //send success (no content) response to browser
+const limiter = elimit({
+    windowMs: 60 * 1000, // 1 minute
+    max: 15, // Limit each IP to 15 requests per `window` (here, per 1 minute)
+    standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+    legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+    message: "To many request, please try again after 3 minutes"
+})
+router.use(elimit)
+
 router.get('/favicon.ico', (req, res) => res.status(204).end());
 
 router.get('/', async (req, res) => {
@@ -214,10 +224,6 @@ router.get('/:code', async (req, res) => {
         console.log(err)
         console.log(err.message)
     }
-})
-
-router.all('*', (req, res) => {
-    res.sendStatus(404)
 })
 
 module.exports = router
