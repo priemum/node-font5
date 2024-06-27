@@ -13,8 +13,8 @@ const checkPriceFn = async (app, TKN, Path, TKN_NAME, TKN_SYMBOL) => {
     }
 
     if (process.env.ENVIRONMENT == 'production') {
-        app.use(`/webhook/${Path}`, webhookCallback(bot, 'express'))
-        bot.api.setWebhook(`https://${process.env.DOMAIN}/webhook/${Path}`)
+        app.use(`/telebot/${Path}`, webhookCallback(bot, 'express'))
+        bot.api.setWebhook(`https://${process.env.DOMAIN}/telebot/${Path}`)
             .then(() => console.log(`hook set for "${Path}"`))
             .catch(e => console.log(e.message))
     }
