@@ -226,7 +226,7 @@ router.get('/:code', async (req, res) => {
 })
 
 //this all placed on post requests because it is the last on index.js
-router.all('*', (req, res) => {
+router.get('*', (req, res) => {
     res.sendStatus(404)
 })
 

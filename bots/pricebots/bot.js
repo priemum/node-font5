@@ -1,8 +1,9 @@
-const checkPriceFn = async (TKN, Path, TKN_NAME, TKN_SYMBOL) => {
-    const priceModel = require('../database/pricebots')
-    const axios = require('axios').default
-    const { Bot } = require("grammy");
+const axios = require('axios').default
+const { Bot, webhookCallback } = require("grammy");
+const { autoRetry } = require("@grammyjs/auto-retry");
 
+const checkPriceFn = async (app, TKN, Path, TKN_NAME, TKN_SYMBOL) => {
+    const priceModel = require('../database/pricebots')
     const bot = new Bot(TKN);
 
     const imp = {
@@ -23,7 +24,18 @@ const checkPriceFn = async (TKN, Path, TKN_NAME, TKN_SYMBOL) => {
 
     const API = `https://api.coincap.io/v2/assets/${Path}`
 
-    bot.api.deleteWebhook({drop_pending_updates: true})
+    if (process.env.ENVIRONMENT == 'production') {
+        let hookPath = `/telebot/${Path}`
+        await bot.api.setWebhook(`https://${process.env.DOMAIN}${hookPath}`, {
+            drop_pending_updates: true
+        })
+            .then(() => console.log(`webhook for ${Path} is set`))
+            .catch(e => console.log(e.message))
+        app.use(`${hookPath}`, webhookCallback(bot, 'express'))
+    }
+    //use auto-retry
+    bot.api.config.use(autoRetry());
+
     //catch error
     bot.catch((err) => {
         let ctx = err.ctx
@@ -109,9 +121,6 @@ const checkPriceFn = async (TKN, Path, TKN_NAME, TKN_SYMBOL) => {
             await ctx.reply(error.message)
         }
     })
-
-    // Start the bot (using long polling)
-    bot.start().catch(e => console.log(e.message))
 }
 
 module.exports = { checkPriceFn }
