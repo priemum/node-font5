@@ -5,15 +5,18 @@ const { Bot, webhookCallback } = require("grammy");
 const checkPriceFn = async (app, TKN, Path, TKN_NAME, TKN_SYMBOL) => {
     const bot = new Bot(TKN);
 
-    if (process.env.ENVIRONMENT == 'production') {
-        app.use(`/webhook/${Path}`, webhookCallback(bot, 'express'))
-    }
-
     const imp = {
         shemdoe: 741815228,
         rt_tester: 5940671686,
         pricelogs: -1002137014810,
         kucoin: `https://www.kucoin.com/r/af/rJ4G8KG`,
+    }
+
+    if (process.env.ENVIRONMENT == 'production') {
+        app.use(`/webhook/${Path}`, webhookCallback(bot, 'express'))
+        bot.api.setWebhook(`https://${process.env.DOMAIN}/webhook/${Path}`)
+            .then(() => console.log(`hook set for "${Path}"`))
+            .catch(e => console.log(e.message))
     }
 
     let admins = [imp.shemdoe, imp.rt_tester]
@@ -112,11 +115,6 @@ const checkPriceFn = async (app, TKN, Path, TKN_NAME, TKN_SYMBOL) => {
             await ctx.reply(error.message)
         }
     })
-
-    if (process.env.ENVIRONMENT == 'production') {
-        bot.api.setWebhook(`https://${process.env.DOMAIN}/webhook/${Path}`)
-            .catch(e => console.log(e.message))
-    }
 }
 
 module.exports = { checkPriceFn }
