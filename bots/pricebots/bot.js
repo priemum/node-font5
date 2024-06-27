@@ -1,9 +1,13 @@
-const checkPriceFn = async (TKN, Path, TKN_NAME, TKN_SYMBOL) => {
-    const priceModel = require('../database/pricebots')
-    const axios = require('axios').default
-    const { Bot } = require("grammy");
+const priceModel = require('../database/pricebots')
+const axios = require('axios').default
+const { Bot, webhookCallback } = require("grammy");
 
+const checkPriceFn = async (app, TKN, Path, TKN_NAME, TKN_SYMBOL) => {
     const bot = new Bot(TKN);
+
+    if (process.env.ENVIRONMENT == 'production') {
+        app.use(`/webhook/${Path}`, webhookCallback(bot, 'express'))
+    }
 
     const imp = {
         shemdoe: 741815228,
@@ -109,12 +113,10 @@ const checkPriceFn = async (TKN, Path, TKN_NAME, TKN_SYMBOL) => {
         }
     })
 
-    // Stopping the bot when the Node.js process is about to be terminated
-    process.once("SIGINT", () => bot.stop());
-    process.once("SIGTERM", () => bot.stop());
-
-    // Start the bot (using long polling)
-    bot.start().catch(e => console.log(e.message))
+    if (process.env.ENVIRONMENT == 'production') {
+        bot.api.setWebhook(`https://${process.env.DOMAIN}/webhook/${Path}`)
+            .catch(e => console.log(e.message))
+    }
 }
 
 module.exports = { checkPriceFn }

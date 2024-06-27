@@ -19,11 +19,10 @@ app.set('view engine', 'ejs')
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static(__dirname + '/public'))
+//bots
+handlePriceBots(app)
 app.set('trust proxy', true) //our app is hosted on server using proxy to pass user request
 app.use(getRouter)
-
-//bots
-handlePriceBots()
 
 app.listen(process.env.PORT || 3000, () => console.log('Listen to port 3000'))
 
