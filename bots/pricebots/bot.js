@@ -1,10 +1,8 @@
-const express = require('express')
-const app = express()
-const priceModel = require('../database/pricebots')
-const axios = require('axios').default
-const { Bot, webhookCallback } = require("grammy");
-
 const checkPriceFn = async (TKN, Path, TKN_NAME, TKN_SYMBOL) => {
+    const priceModel = require('../database/pricebots')
+    const axios = require('axios').default
+    const { Bot } = require("grammy");
+
     const bot = new Bot(TKN);
 
     const imp = {
@@ -12,13 +10,6 @@ const checkPriceFn = async (TKN, Path, TKN_NAME, TKN_SYMBOL) => {
         rt_tester: 5940671686,
         pricelogs: -1002137014810,
         kucoin: `https://www.kucoin.com/r/af/rJ4G8KG`,
-    }
-
-    if (process.env.ENVIRONMENT == 'production') {
-        app.use(`/telebot/${Path}`, webhookCallback(bot, 'express'))
-        await bot.api.setWebhook(`https://${process.env.DOMAIN}/telebot/${Path}`)
-            .then(() => console.log(`hook set for "${Path}"`))
-            .catch(e => console.log(e.message))
     }
 
     let admins = [imp.shemdoe, imp.rt_tester]
@@ -32,6 +23,7 @@ const checkPriceFn = async (TKN, Path, TKN_NAME, TKN_SYMBOL) => {
 
     const API = `https://api.coincap.io/v2/assets/${Path}`
 
+    bot.api.deleteWebhook({drop_pending_updates: true})
     //catch error
     bot.catch((err) => {
         let ctx = err.ctx
@@ -117,6 +109,9 @@ const checkPriceFn = async (TKN, Path, TKN_NAME, TKN_SYMBOL) => {
             await ctx.reply(error.message)
         }
     })
+
+    // Start the bot (using long polling)
+    bot.start().catch(e => console.log(e.message))
 }
 
 module.exports = { checkPriceFn }
