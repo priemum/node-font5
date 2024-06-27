@@ -1,8 +1,10 @@
+const express = require('express')
+const app = express()
 const priceModel = require('../database/pricebots')
 const axios = require('axios').default
 const { Bot, webhookCallback } = require("grammy");
 
-const checkPriceFn = async (app, TKN, Path, TKN_NAME, TKN_SYMBOL) => {
+const checkPriceFn = async (TKN, Path, TKN_NAME, TKN_SYMBOL) => {
     const bot = new Bot(TKN);
 
     const imp = {
@@ -14,7 +16,7 @@ const checkPriceFn = async (app, TKN, Path, TKN_NAME, TKN_SYMBOL) => {
 
     if (process.env.ENVIRONMENT == 'production') {
         app.use(`/telebot/${Path}`, webhookCallback(bot, 'express'))
-        bot.api.setWebhook(`https://${process.env.DOMAIN}/telebot/${Path}`)
+        await bot.api.setWebhook(`https://${process.env.DOMAIN}/telebot/${Path}`)
             .then(() => console.log(`hook set for "${Path}"`))
             .catch(e => console.log(e.message))
     }
